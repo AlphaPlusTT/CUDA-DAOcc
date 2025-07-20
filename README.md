@@ -3,13 +3,13 @@
 This repository contains sources and model for [DAOcc](https://github.com/AlphaPlusTT/DAOcc) inference using CUDA & TensorRT.
 
 ## 3D Object Detection and Occupancy prediction
-- We use the [daocc_occ3d_wo_mask_v2.yaml](https://github.com/AlphaPlusTT/DAOcc/blob/master/configs/nuscenes/occ3d/daocc_occ3d_wo_mask_v2.yaml) configuration.
+- We use the [daocc_occ3d_wo_mask_v2.yaml](https://github.com/AlphaPlusTT/DAOcc/blob/master/configs/nuscenes/occ3d/daocc_occ3d_wo_mask_v2.yaml) configuration for TensorRT.
 
-| **Model** | **Framework** | **Precision** | **mAP** | **NDS** | **mIoU** | **FPS** |
-|:---------:|:-------------:|:-------------:|:-------:|:-------:|:--------:|:-------:|
-|   DAOcc   |    PyTorch    |     FP32      |  59.43  |  64.70  |  54.33   |         |
-|   DAOcc   |    TensorRT   |     FP16      |         |         |          |         |
-- Note: Inference speed was measured on an RTX 4090 GPU using 100 nuScenes validation samples (average result).
+| **Model** | **Framework** | **Precision** | **mAP** | **NDS** | **mIoU** | **FPS** | **FPS(wo det)** |
+|:---------:|:-------------:|:-------------:|:-------:|:-------:|:--------:|:-------:|:---------------:|
+|   DAOcc   |    PyTorch    |     FP32      |  59.43  |  64.70  |  54.33   |   7.1   |       7.8       |
+|   DAOcc   |   TensorRT    |     FP16      |  60.27  |  65.22  |  54.25   |  83.0   |      104.9      |
+- Note: Inference speed was measured on an RTX 4090 GPU using 50 nuScenes validation samples (average result).
   - Since the number of lidar points is the main reason that affects the FPS. 
   - Please refer to the readme of [3DSparseConvolution](/libraries/3DSparseConvolution/README.md) for more details.
 
@@ -150,6 +150,8 @@ bash tool/run.sh
 ```bash
 cp qat/test-mAP-for-cuda.py DAOcc/tools
 cd DAOcc
+ln -s ../build/libpybev.so
+ln -s ../model
 python tools/test-mAP-for-cuda.py
 ```
 

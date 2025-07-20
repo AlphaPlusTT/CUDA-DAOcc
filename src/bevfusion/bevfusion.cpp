@@ -158,7 +158,7 @@ public:
 
     num_points = std::min(cappoints, num_points);
 
-    printf("==================BEVFusion===================\n");
+    printf("==================DAOcc==================\n");
     std::vector<float> times;
     cudaStream_t _stream = static_cast<cudaStream_t>(stream);
     timer_.start(_stream);
@@ -211,7 +211,7 @@ public:
 
     float total_time = std::accumulate(times.begin(), times.end(), 0.0f, std::plus<float>{});
     printf("Total: %.3f ms\n", total_time);
-    printf("=============================================\n");
+    printf("=========================================\n");
     // return output;
   }
 

@@ -124,7 +124,7 @@ def single_cuda_test(data_loader):
 def parse_args():
     parser = argparse.ArgumentParser(description="MMDet test (and eval) a model")
     parser.add_argument("--config",
-                        default="bevfusion/configs/nuscenes/det/transfusion/secfpn/camera+lidar/resnet50/convfuser.yaml",
+                        default="configs/nuscenes/occ3d/daocc_occ3d_nus_wo_mask_v2.yaml",
                         help="test config file path")
     parser.add_argument("--out", help="output result file in pickle format")
     parser.add_argument(
