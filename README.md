@@ -9,6 +9,7 @@ This repository contains sources and model for [DAOcc](https://github.com/AlphaP
 |:---------:|:-------------:|:-------------:|:-------:|:-------:|:--------:|:-------:|:---------------:|
 |   DAOcc   |    PyTorch    |     FP32      |  59.43  |  64.70  |  54.33   |   7.1   |       7.8       |
 |   DAOcc   |   TensorRT    |     FP16      |  60.27  |  65.22  |  54.25   |  83.0   |      104.9      |
+|   DAOcc   |   TensorRT    |   FP16+INT8   |  59.56  |  64.71  |  53.86   |  111.5  |      153.8      |
 - Note: Inference speed was measured on an RTX 4090 GPU using 50 nuScenes validation samples (average result).
   - Since the number of lidar points is the main reason that affects the FPS. 
   - Please refer to the readme of [3DSparseConvolution](/libraries/3DSparseConvolution/README.md) for more details.
@@ -77,8 +78,10 @@ ln -s DAOcc/data
 python qat/ptq.py --config=DAOcc/configs/nuscenes/occ3d/daocc_occ3d_nus_wo_mask_v2.yaml --ckpt=model/daocc.pth --calibrate_batch 300
 ```
 
-#### 3. Export INT8 model (not test)
-
+#### 3. Export INT8 model
+Please make sure the following ONNX packages are installed:
+- onnx_simplifier==0.4.8
+- onnxsim==0.4.10
 ```bash
 python qat/export-camera.py --ckpt=model/daocc_ptq.pth
 python qat/export-transfuser.py --ckpt=model/daocc_ptq.pth

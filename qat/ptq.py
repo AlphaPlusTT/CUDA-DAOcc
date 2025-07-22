@@ -78,8 +78,8 @@ def load_model(cfg, checkpoint_path = None):
 
 def quantize_net(model):
     quantize.quantize_encoders_lidar_branch(model.encoders.lidar.backbone)    
-    # quantize.quantize_encoders_camera_branch(model.encoders.camera)
-    # quantize.replace_to_quantization_module(model.fuser)
+    quantize.quantize_encoders_camera_branch(model.encoders.camera)
+    quantize.replace_to_quantization_module(model.fuser)
     quantize.quantize_decoder(model.decoder)
     model.encoders.lidar.backbone = funcs.layer_fusion_bn(model.encoders.lidar.backbone)
     return model
