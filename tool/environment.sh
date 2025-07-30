@@ -49,7 +49,7 @@ export CUDNN_Lib=/home/cf206/local/cuda/lib64
 # For CUDA-12.x:    SPCONV_CUDA_VERSION=12.6
 export SPCONV_CUDA_VERSION=11.4
 
-# resnet50/resnet50int8/swint
+# resnet50/resnet50-int8/swint
 export DEBUG_MODEL=resnet50
 
 # fp16/int8
